@@ -1,0 +1,29 @@
+<html>
+
+<head>
+  <script src="http://localhost:5080/auth/js/keycloak.js"></script>
+  <script>
+    function initKeycloak() {
+      var keycloak = new Keycloak({
+        url: 'http://localhost:5080/auth/',
+        realm: 'master',
+        clientId: 'dest-app'
+      });
+      keycloak.init({
+        onLoad: 'login-required',
+        checkLoginIframe: false,
+      }).then(function (authenticated) {
+        alert(authenticated ? 'authenticated' : 'not authenticated');
+      });
+    }
+  </script>
+</head>
+
+<body onload="initKeycloak()">
+  <h1>Showing "hidden" contents only after successful login</h1>
+  <a
+    href="http://localhost:5080/auth/realms/master/protocol/openid-connect/logout?redirect_uri=http%3A%2F%2Flocalhost%3A5081">Logout
+  </a>
+</body>
+
+</html>

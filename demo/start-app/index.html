@@ -1,0 +1,26 @@
+<html>
+
+<a href="#" id="click_me">Init Browser Session</a>
+<br />
+<a href="http://localhost:5081/" target="dest-app">Open dest-app</a>
+
+<script type="text/javascript">
+  document.getElementById('click_me').addEventListener("click", function (event) {
+    (function (event) {
+      // config
+      var providerUrl = "http://localhost:5080";
+      var realm = "master";
+      var targetClientForNewSession = "dest-app";
+      var jwt = "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIwZnNNQ2F3Slg1SmhDcFpQMFl3TnlMYkt2T0EtNC00Z21od1h6aGNQcF84In0.eyJleHAiOjE2NDUwOTQwMDcsImlhdCI6MTY0NTA5Mzk0NywianRpIjoiNTYwMjRhYzQtMTdjZC00MjQwLWE3YzEtNWZhZDM2YmZjYWY1IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MDgwL2F1dGgvcmVhbG1zL21hc3RlciIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiIyODc3N2RkZi1iYzFjLTQxYTYtOTA4Yy1jMzFiNGM5NDZmZjAiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJwcml2YXRlIiwic2Vzc2lvbl9zdGF0ZSI6ImI1YjM3MzQyLWEyNDItNDQ3NC1iODcxLWEzNGU5OWI1ZThiOSIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy1tYXN0ZXIiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ0ZXN0dXNlciJ9.l7TdoH8HfazBsVwvhEqBH-0yvdDVr5xc364A2DT41utonzpq2p2MdViY_GYRPs3tPIvDXqPs4AFjXRftKN4hg5t-8ZH5ndpOqYsVmXOm9xDQD4ypLTnfZdJ0wjEpkjK0_AUUU82o3wevUThreyGymnHESSeryG5YinnldbS5WNagRutoML7F1rC6gfWu6CL2Rkwhhm3rfK5OAv4ULBqBLzKU62YT7rUAtTj7FQYPwJi0WCxvYiio2hGwRPwkvciEskTC9U4bmFtxlcLdvFhgCxhf4qXz1GlR8VMYAi_WHWoJ1T_DayvDLcc3GrbExhrZzOihfxOncQdzRQWmjV-SlQ";
+      // invocation
+      var xmlHttp = new XMLHttpRequest();
+      xmlHttp.open("GET", `${providerUrl}/auth/realms/${realm}/browser-session/init?publicClient=${targetClientForNewSession}`, false);
+      xmlHttp.withCredentials = true;
+      xmlHttp.setRequestHeader("Authorization", "Bearer " + jwt);
+      xmlHttp.send(null);
+      return xmlHttp.responseText;
+    }).call(document.getElementById('click_me'), event);
+  });
+</script>
+
+</html>
