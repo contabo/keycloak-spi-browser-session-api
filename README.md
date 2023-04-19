@@ -1,14 +1,14 @@
 # keycloak-spi-browser-session-api
 
-The goal of this [SPI (Service Provider Interface)](https://www.keycloak.org/docs/latest/server_development/index.html#_providers) for [Keycloak](https://www.keycloak.org/)  is to create a browser session by setting all relevant cookes out of a valid JWT (Json Web Token).
+The goal of this [SPI (Service Provider Interface)](https://www.keycloak.org/docs/latest/server_development/index.html#_providers) for [Keycloak](https://www.keycloak.org/)  is to create a browser session by setting all relevant cookies out of a valid JWT (Json Web Token).
 
-Useful to provide SSO (Single Sign On) capabilites for legacy web application to a new web application being authenticated by Keycloak.
+Useful to provide SSO (Single Sign On) capabilities for legacy web application to a new web application being authenticated by Keycloak.
 
 __Important__ to note is that this SPI expects the legacy web application to be able to access a valid JWT. This might occur if you need to introduce new features in legacy web applications.
 
 ## Usage
 
-Prerequiste is a valid JWT (access token) obtained from your Keycloak IDM.
+Prerequisite is a valid JWT (access token) obtained from your Keycloak IDM.
 
 With that valid JWT you may invoke within a browser the API provided by this SPI. E.g. with the following example JS code:
 
@@ -20,7 +20,7 @@ var targetClientForNewSession = "application";
 var jwt = "eyJhbGciOiJSUzI1NiIs.....";
 // invocation
 var xmlHttp = new XMLHttpRequest();
-xmlHttp.open("GET", `${providerUrl}/auth/realms/${realm}/browser-session/init?publicCient=${targetClientForNewSession}`, false);
+xmlHttp.open("GET", `${providerUrl}/auth/realms/${realm}/browser-session/init?publicClient=${targetClientForNewSession}`, false);
 xmlHttp.withCredentials = true;
 xmlHttp.setRequestHeader("Authorization", "Bearer " + jwt);
 xmlHttp.send(null);
@@ -33,9 +33,9 @@ This will create a new user session for the provided client and set the Keycloak
 
 It contains of one single API request:
 
-HTTP Method | Path | Request Header | Description
---- | --- | --- | ---
-  GET | `baseUrl`/auth/realms/`realm`/browser-session/init?publicCient=`targetClientName` | Ensure `Authorization: Bearer` with the JWT | `baseUrl`: URL to Keycloak e.g. <https://your.keycloak.example.org> <br> `realm`: realm to be used e.g. master <br> `targetClientName`: public client (defined in Keycloak) for which to start the browser session
+| HTTP Method | Path                                                                               | Request Header                              | Description                                                                                                                                                                                                        |
+|-------------|------------------------------------------------------------------------------------|---------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| GET         | `baseUrl`/auth/realms/`realm`/browser-session/init?publicClient=`targetClientName` | Ensure `Authorization: Bearer` with the JWT | `baseUrl`: URL to Keycloak e.g. <https://your.keycloak.example.org> <br> `realm`: realm to be used e.g. master <br> `targetClientName`: public client (defined in Keycloak) for which to start the browser session |
 
 ## Deployment
 
